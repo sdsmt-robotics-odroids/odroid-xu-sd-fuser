@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+if [ -z $1 ]; then
+  echo "usage: odroid-xu-sd-fuser [DEVICE_PATH]"
+  exit 1
+fi
+
+if [ -b $1 ]; then
+  if [ -b $1boot0 ]; then
+    echo -n "Fusing boot blob to $1boot0..."
+  else
+    echo "$1 has no boot partition!"
+    exit 3
+  fi
+else
+  echo "$1 is not a block device!"
+  exit 2
+fi
+
+dd iflag=dsync oflag=dsync if=@bootblobpath@ of=$1boot0
+
+echo "Success!"
+exit 0
