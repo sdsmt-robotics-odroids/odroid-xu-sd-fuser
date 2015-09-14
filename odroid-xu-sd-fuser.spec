@@ -1,5 +1,5 @@
 Name:           odroid-xu-sd-fuser
-Version:        0.1.0
+Version:        0.1.1
 Release:        1%{?dist}
 Summary:        Boot media blob for ODROID-XU
 
@@ -62,5 +62,8 @@ install -p -m0755 -D odroid-xu-emmc-fuser %{buildroot}%{_bindir}/odroid-xu-emmc-
 %{_datadir}/%{name}/bootblob.bin
 
 %changelog
+* Sun Sep 13 2015 Scott K Logan <logans@cottsay.net> - 0.1.1-1
+- Update eMMC fuser script
+
 * Sat Apr 04 2015 Scott K Logan <logans@cottsay.net> - 0.1.0-1
 - Initial package

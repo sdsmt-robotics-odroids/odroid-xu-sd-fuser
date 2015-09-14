@@ -6,13 +6,19 @@ if [ -z $1 ]; then
 fi
 
 if [ -b $1 ]; then
-  echo -n "Fusing boot blob to $1..."
+  echo "Fusing boot blob to $1..."
 else
   echo "$1 is not a block device!"
   exit 2
 fi
 
-dd iflag=dsync oflag=dsync if=@bootblobpath@ of=$1 seek=1
+RET=0
+dd iflag=dsync oflag=dsync if=@bootblobpath@ of=$1 seek=1 || RET=$?
 
-echo "Success!"
-exit 0
+if [ $RET -ne 0 ]; then
+  echo "Failed!"
+else
+  echo "Success!"
+fi
+
+exit $RET
